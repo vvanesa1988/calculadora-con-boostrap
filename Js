@@ -1,0 +1,106 @@
+var valorVisor = 0;
+var numeroA;
+var numeroB;
+var operacion;
+var ahora = new Date;
+
+
+function boton(datos) {
+    var auxiliar = document.getElementById("pantalla").value; // el auxiliar recibe el valor presionando la pantalla
+    document.getElementById("pantalla").value = auxiliar + datos; // visor recibe el valor de auxiliar y lo concatena con el datos
+
+
+    valorVisor = document.getElementById("pantalla").value = auxiliar + datos;
+    //document.getElementById("historico").innerHTML = ahora.getHours();
+    
+    // mostrar el saldo  encima de la pantalla
+    var hora = ahora.getHours();
+    
+    if(hora >= 0 && hora <= 12){
+      document.getElementById("historico").textContent = "Buen dia";
+    }
+    if(hora >= 13 && hora <= 17){
+      document.getElementById("historico").textContent = "Buenas tardes";
+    }
+    if(hora >= 18 && hora <= 23){
+      document.getElementById("historico").textContent = "Buenas noches";
+    }
+}
+
+
+function btn_sumar(caracter){
+    numeroA = valorVisor;
+    operacion = "+";
+    
+    limpiar();
+    //document.getElementById("historico").innerHTML += operacion;
+}
+
+function btn_restar(caracter){
+  numeroA = valorVisor;
+  operacion = "-";
+  
+  limpiar();
+}
+
+function btn_multiplicar(caracter){
+  numeroA = valorVisor;
+  operacion = "*";
+  
+  limpiar();
+}
+
+function btn_dividir(caracter){
+  numeroA = valorVisor;
+  operacion = "/";
+  
+  limpar();
+}
+
+function reset() {
+    // limpiar pantalla
+    document.getElementById('visor').value = '';
+    valorVisor = 0;
+    operacion = "";
+}
+function limpiar(){
+    document.getElementById('visor').value = '';
+    
+}
+
+function btn_igual(){
+    numeroB = valorVisor;
+    calcular();
+}
+
+function calcular() {
+    // hacer el calculo, obtenga el resultado y mostrar en pantalla
+    //document.getElementById('pantalla').value = eval(resultado);
+
+    //document.getElementById('pantalla').value = resultado;
+    //document.getElementById('pantalla').value = eval(valorVisor);
+
+    var total = 0;
+    var ultimoTotal = 0;
+      switch(operacion){
+        case "+":
+          total = parseFloat(numeroA) + parseFloat(numeroB);
+          break;
+        case "-":
+            total = parseFloat(numeroA) - parseFloat(numeroB);
+            break;
+        case "*":
+          total = parseFloat(numeroA) * parseFloat(numeroB);
+          break;
+        case "/":
+          total = parseFloat(numeroA) / parseFloat(numeroB);
+          break;
+      }
+      ultimoTotal = total;
+      reset();
+      document.getElementById('pantalla').value = total;
+      valorVisor = ultimoTotal;
+
+}
+
+
